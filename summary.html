@@ -402,40 +402,43 @@
 
       // Update payment info
       const totalAmount = 5000 * passengerData.length;
-      document.querySelector('.payment-card').innerHTML = `
-        <h3>Payment Summary</h3>
-        <div style="margin: 15px 0">
-          <div style="display: flex; justify-content: space-between; margin-bottom: 10px">
-            <span>Base Fare</span>
-            <span>₹${totalAmount.toLocaleString()}</span>
-          </div>
-          <div style="display: flex; justify-content: space-between; margin-bottom: 10px">
-            <span>Taxes & Fees</span>
-            <span>₹${(totalAmount * 0.18).toLocaleString()}</span>
-          </div>
-          <div style="border-top: 1px solid #eee; margin: 10px 0; padding-top: 10px; font-weight: bold">
-            <div style="display: flex; justify-content: space-between">
-              <span>Total Amount</span>
-              <span>₹${(totalAmount * 1.18).toLocaleString()}</span>
-            </div>
-          </div>
-        </div>
-        <div class="payment-methods">
-          <div class="qr-section">
-            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FLIGHT-${flightDetails.flightNumber}" 
-                 alt="Payment QR Code" class="qr-image">
-            <p>Scan QR code to pay</p>
-          </div>
-          <div class="upi-input-section">
-            <p>Or enter UPI ID</p>
-            <div class="upi-input-container">
-              <input type="text" class="upi-input" placeholder="Enter UPI ID">
-              <button class="verify-btn" onclick="verifyPayment()">Verify</button>
-            </div>
-          </div>
-        </div>
-        <button class="back-button" onclick="window.location.href='seat.html'">Back to Seat Selection</button>
-      `;
+     document.querySelector('.payment-card').innerHTML = `
+  <h3>Payment Summary</h3>
+  <div style="margin: 15px 0">
+    <div style="display: flex; justify-content: space-between; margin-bottom: 10px">
+      <span>Base Fare</span>
+      <span>₹${totalAmount.toLocaleString()}</span>
+    </div>
+    <div style="display: flex; justify-content: space-between; margin-bottom: 10px">
+      <span>Taxes & Fees</span>
+      <span>₹${(totalAmount * 0.18).toLocaleString()}</span>
+    </div>
+    <div style="border-top: 1px solid #eee; margin: 10px 0; padding-top: 10px; font-weight: bold">
+      <div style="display: flex; justify-content: space-between">
+        <span>Total Amount</span>
+        <span>₹${(totalAmount * 1.18).toLocaleString()}</span>
+      </div>
+    </div>
+  </div>
+  <div class="payment-methods">
+    <div class="qr-section">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FLIGHT-${flightDetails.flightNumber}" 
+           alt="Payment QR Code" class="qr-image">
+      <p>Scan QR code to pay</p>
+    </div>
+    <div class="upi-input-section">
+      <p>Or enter UPI ID</p>
+      <div class="upi-input-container">
+        <input type="text" class="upi-input" placeholder="Enter UPI ID">
+        <button class="verify-btn" onclick="verifyPayment()">Verify</button>
+      </div>
+    </div>
+  </div>
+
+  <button class="pay-now-btn" onclick="processPayment()">Pay Now</button>
+  <button class="back-button" onclick="window.location.href='seat.html'">Back to Seat Selection</button>
+`;
+
     }
 
     function verifyPayment() {
