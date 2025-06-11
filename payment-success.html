@@ -200,10 +200,30 @@
       }
     }
 
+   
     function downloadTicket() {
-      // Simulate ticket download
-      alert('Your ticket has been downloaded!');
-    }
+  const flightDetails = JSON.parse(localStorage.getItem('selectedFlight') || '{}');
+  const passengerData = JSON.parse(localStorage.getItem('passengerData') || '[]');
+
+  let ticketContent = `--- FlyEast Ticket ---\n\n`;
+  ticketContent += `Flight Number: ${flightDetails.flightNumber}\n`;
+  ticketContent += `From: ${flightDetails.from}\n`;
+  ticketContent += `To: ${flightDetails.to}\n`;
+  ticketContent += `Departure: ${flightDetails.departure}\n`;
+  ticketContent += `Arrival: ${flightDetails.arrival}\n`;
+  ticketContent += `Passengers: ${passengerData.length}\n`;
+  ticketContent += `Total Amount: ₹${(5000 * passengerData.length).toLocaleString()}\n\n`;
+  ticketContent += `Thank you for choosing FlyEast! ✈`;
+
+  const blob = new Blob([ticketContent], { type: 'text/plain' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'FlyEast_Ticket.txt';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
+
 
     // Update booking info when page loads
     document.addEventListener('DOMContentLoaded', updateBookingInfo);
