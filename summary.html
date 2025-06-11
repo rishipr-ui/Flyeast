@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Review & Pay - FlyEast</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f0f6ff;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      padding: 30px 5%;
+      background-color: white;
+    }
+
+    header h1 {
+      margin-top: 25px;
+      font-size: 32px;
+      font-weight: 600;
+    }
+
+    header h1 span {
+      color: #ff6b6b;
+    }
+
+    .trip-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 10px;
+      font-size: 14px;
+      color: #555;
+    }
+
+    .header {
+      background-color: white;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ccc;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #ff6b6b;
+    }
+
+    .back-link {
+      color: #003366;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .main-container {
+      display: flex;
+      gap: 20px;
+      padding: 20px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .booking-details {
+      flex: 1;
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .payment-sidebar {
+      width: 300px;
+      position: sticky;
+      top: 85px;
+      align-self: flex-start;
+    }
+
+    .flight-info {
+      padding: 20px;
+      border-bottom: 1px solid #eee;
+    }
+
+    .route-header {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .route-cities {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+    }
+
+    .route-arrow {
+      color: #666;
+      font-size: 20px;
+    }
+
+    .flight-number {
+      color: #666;
+      font-size: 14px;
+      margin-top: 5px;
+    }
+
+    .passenger-section {
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 15px;
+    }
+
+    .passenger-card {
+      padding: 15px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      margin-bottom: 15px;
+    }
+
+    .passenger-name {
+      font-weight: bold;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .passenger-info {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      color: #666;
+      font-size: 14px;
+    }
+
+    .seat-info {
+      background-color: #f8f9fa;
+      padding: 10px;
+      border-radius: 4px;
+      margin-top: 10px;
+      border: 1px solid #eee;
+    }
+
+    .seat-info span {
+      font-weight: bold;
+      color: #333;
+    }
+
+    .payment-card {
+      background-color: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .back-button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: transparent;
+      color: #666;
+      border: 1px solid #ccc;
+      border-radius: 25px;
+      font-size: 14px;
+      margin-top: 15px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .back-button:hover {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    .payment-methods {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .qr-section {
+      padding: 20px;
+      border: 1px solid #eee;
+      border-radius: 8px;
+      margin: 20px 0;
+      background-color: #f8f9fa;
+    }
+
+    .qr-image {
+      width: 200px;
+      height: 200px;
+      margin: 0 auto 15px;
+      display: block;
+      border-radius: 8px;
+      object-fit: contain;
+    }
+
+    .upi-input-section {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #eee;
+    }
+
+    .upi-input-container {
+      display: flex;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .upi-input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .verify-btn {
+      padding: 10px 20px;
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .verify-btn:hover {
+      background-color: #ff5252;
+    }
+
+    .payment-instructions {
+      font-size: 14px;
+      color: #666;
+      margin-top: 15px;
+    }
+
+    .payment-instructions ol {
+      margin-top: 10px;
+      padding-left: 20px;
+    }
+
+    .payment-instructions li {
+      margin-bottom: 5px;
+    }
+
+    .total-amount {
+      font-size: 24px;
+      font-weight: bold;
+      color: #333;
+      margin: 20px 0;
+      text-align: center;
+    }
+
+    .pay-now-btn {
+      display: block;
+      width: 100%;
+      padding: 15px;
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .pay-now-btn:hover {
+      background-color: #ff5252;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="trip-info" id="tripDetails">
+      <div>Loading route...</div>
+      <div>Loading date...</div>
+      <div>Loading passengers...</div>
+    </div>
+
+    <h1>Review your booking details</h1>
+  </header>
+
+  <div class="header">
+    <div class="logo">FlyEast ✈</div>
+    <a href="airplane.html" class="back-link">← BACK TO PASSENGER DETAILS</a>
+  </div>
+
+  <div class="main-container">
+    <div class="booking-details">
+      <div class="flight-info">
+        <div class="route-header">
+          <div class="route-cities" id="routeCities">Loading route...</div>
+          <div class="route-arrow">→</div>
+        </div>
+        <div class="flight-number" id="flightNumber">Loading flight number...</div>
+      </div>
+
+      <div class="passenger-section">
+        <div class="section-title">Passenger Details</div>
+        <div id="passengerCards">
+          <!-- Passenger cards will be generated here -->
+        </div>
+      </div>
+    </div>
+
+    <div class="payment-sidebar">
+      <div class="payment-card">
+        <div class="total-amount">
+          Total Amount: <span id="totalAmount">₹0</span>
+        </div>
+
+        <div class="payment-methods">
+          <div class="qr-section">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FLYEAST-PAYMENT" alt="Payment QR Code" class="qr-image">
+            <p>Scan QR code to pay</p>
+          </div>
+
+          <div class="upi-input-section">
+            <p>Or enter UPI ID</p>
+            <div class="upi-input-container">
+              <input type="text" class="upi-input" placeholder="Enter UPI ID">
+              <button class="verify-btn">Verify</button>
+            </div>
+          </div>
+
+          <div class="payment-instructions">
+            <p>Payment Instructions:</p>
+            <ol>
+              <li>Scan the QR code using any UPI app</li>
+              <li>Or enter your UPI ID and click verify</li>
+              <li>Complete the payment in your UPI app</li>
+              <li>Wait for payment confirmation</li>
+            </ol>
+          </div>
+        </div>
+
+        <button class="pay-now-btn" onclick="processPayment()">Pay Now</button>
+        <button class="back-button" onclick="window.location.href='airplane.html'">Back to Passenger Details</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function updateBookingInfo() {
+      const flightDetails = JSON.parse(localStorage.getItem('selectedFlight') || '{}');
+      const passengerData = JSON.parse(localStorage.getItem('passengerData') || '[]');
+      const seatSelections = JSON.parse(localStorage.getItem('seatSelections') || '[]');
+
+      // Update flight info
+      if (flightDetails.from && flightDetails.to) {
+        document.querySelector('.route-cities').textContent = 
+          `${flightDetails.from.split(',')[0]} → ${flightDetails.to.split(',')[0]}`;
+        document.querySelector('.flight-number').textContent = `Flight ${flightDetails.flightNumber}`;
+        
+        const tripDetails = document.getElementById('tripDetails');
+        tripDetails.innerHTML = `
+          <div>${flightDetails.from} → ${flightDetails.to}</div>
+          <div>${flightDetails.departure} - ${flightDetails.arrival}</div>
+          <div>${passengerData.length} Passenger(s)</div>
+        `;
+      }
+
+      // Update passenger info
+      const passengerSection = document.querySelector('.passenger-section');
+      passengerSection.innerHTML = '<div class="section-title">Passenger Details</div>';
+
+      passengerData.forEach((passenger, index) => {
+        const seatInfo = seatSelections.find(s => s.passenger === index + 1);
+        const passengerCard = document.createElement('div');
+        passengerCard.className = 'passenger-card';
+        passengerCard.innerHTML = `
+          <div class="passenger-name">${passenger.firstName} ${passenger.lastName}</div>
+          <div class="passenger-info">
+            <div>Gender: ${passenger.gender}</div>
+            <div>Phone: ${passenger.phone}</div>
+            <div>DOB: ${passenger.dob || 'Not provided'}</div>
+          </div>
+          <div class="seat-info">
+            Seat: ${seatInfo ? `${seatInfo.section} Section - ${seatInfo.seatType} Seat` : 'Not assigned'}
+          </div>
+        `;
+        passengerSection.appendChild(passengerCard);
+      });
+
+      // Update payment info
+      const totalAmount = 5000 * passengerData.length;
+      document.querySelector('.payment-card').innerHTML = `
+        <h3>Payment Summary</h3>
+        <div style="margin: 15px 0">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px">
+            <span>Base Fare</span>
+            <span>₹${totalAmount.toLocaleString()}</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 10px">
+            <span>Taxes & Fees</span>
+            <span>₹${(totalAmount * 0.18).toLocaleString()}</span>
+          </div>
+          <div style="border-top: 1px solid #eee; margin: 10px 0; padding-top: 10px; font-weight: bold">
+            <div style="display: flex; justify-content: space-between">
+              <span>Total Amount</span>
+              <span>₹${(totalAmount * 1.18).toLocaleString()}</span>
+            </div>
+          </div>
+        </div>
+        <div class="payment-methods">
+          <div class="qr-section">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=FLIGHT-${flightDetails.flightNumber}" 
+                 alt="Payment QR Code" class="qr-image">
+            <p>Scan QR code to pay</p>
+          </div>
+          <div class="upi-input-section">
+            <p>Or enter UPI ID</p>
+            <div class="upi-input-container">
+              <input type="text" class="upi-input" placeholder="Enter UPI ID">
+              <button class="verify-btn" onclick="verifyPayment()">Verify</button>
+            </div>
+          </div>
+        </div>
+        <button class="back-button" onclick="window.location.href='seat.html'">Back to Seat Selection</button>
+      `;
+    }
+
+    function verifyPayment() {
+      const upiInput = document.querySelector('.upi-input');
+      if (!upiInput.value) {
+        alert('Please enter a UPI ID');
+        return;
+      }
+      window.location.href = 'payment-success.html';
+    }
+
+    function processPayment() {
+      // Simulate payment processing
+      alert('Payment processed successfully!');
+      window.location.href = 'payment-success.html';
+    }
+
+    // Update booking info when page loads
+    document.addEventListener('DOMContentLoaded', updateBookingInfo);
+  </script>
+</body>
+</html> 
